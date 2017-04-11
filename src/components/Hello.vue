@@ -1,17 +1,27 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ message }}</h1>
     <router-link to="users">User listing</router-link>
+    <router-link to="todos">Todo listing</router-link>
+    <BooksList></BooksList>
   </div>
 </template>
 
 <script>
+import BooksList from '@/components/BooksList'
+
 export default {
   name: 'hello',
+  computed: {
+
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      message: 'Welcome to vue App'
     }
+  },
+  components: {
+    BooksList
   }
 }
 </script>

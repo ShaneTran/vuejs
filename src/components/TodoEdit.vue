@@ -30,19 +30,19 @@
       this.editTodo(id);
     },
     methods: {
-      ...mapActions(['editTodo']),
+      ...mapActions(['editTodo', 'saveTodo']),
       ...mapMutations(['SET_FIELD']),
       setField(attribute, event) {
         this.SET_FIELD([attribute, event.target.value])
       },
       save() {
         var _this = this;
-        this.$store.dispatch('saveTodo', this.todo).done(function(data) {
-          console.log(data);
-          // _this.$router.push('/todos');
-        }).catch(function() {
+        Api.saveTodo(this.todo).done(function(data) {
+          _this.saveTodo(data);
+          _this.$router.push('/todos');
+        }).fail(function() {
           console.log('error');
-        })
+        });
       }
     }
   }

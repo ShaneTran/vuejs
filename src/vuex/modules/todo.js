@@ -56,9 +56,7 @@ export default {
       });
     },
     saveTodo(state, todo) {
-      return Api.saveTodo(todo).then(function(data) {
-        state.commit('SAVE_TODO', data);
-      });
+      state.commit('SAVE_TODO', todo);
     },
     completedTodo(state, todo) {
       Api.setCompleted(todo, 'COMPLETED').then(function(data) {
@@ -71,9 +69,7 @@ export default {
       });
     },
     removeTodo(state, todo) {
-      Api.removeTodo(todo).done(function(data) {
-        state.commit('REMOVE_TODO', todo);
-      });
+      state.commit('REMOVE_TODO', todo);
     },
     editTodo(state, id) {
       Api.getTodoItem(id).then(function(data) {

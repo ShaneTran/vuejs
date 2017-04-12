@@ -8,6 +8,7 @@ import UserPosts from '@/components/UserPosts'
 import UserNew from '@/components/UserNew'
 import TodoList from '@/components/TodoList'
 import TodoEdit from '@/components/TodoEdit'
+import Login from '@/components/Login'
 
 
 Vue.use(Router)
@@ -16,32 +17,52 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: { requiresAuth: false },
+      beforeEnter: function(to, from, next) {
+        console.log(this.$store);
+        // if (!store.getters.checkLogined) {
+        //   // next('/login');
+        // } else {
+        //   // next();
+        // }
+      }
+    },
+    {
       path: '/',
       name: 'Hello',
-      component: Hello
+      component: Hello,
+      meta: { requiresAuth: true }
     },
     {
       path: '/users',
       name: 'users',
-      component: Users
+      component: Users,
+      meta: { requiresAuth: true }
     },
     {
       path: '/user/new',
       name: 'user_create',
-      component: UserNew
+      component: UserNew,
+      meta: { requiresAuth: true }
     },
     {
       path: '/todos',
       name: 'todos',
-      component: TodoList
+      component: TodoList,
+      meta: { requiresAuth: true }
     },
     {
       path: '/todos/:id',
       name: 'todoEdit',
-      component: TodoEdit
+      component: TodoEdit,
+      meta: { requiresAuth: true }
     },
     {
       path: '/user/:userID', component: User,
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',name: 'user', component: UserDetail

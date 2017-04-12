@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import Api from '@/vuex/apis/todo'
   import {mapActions, mapState, mapGetters} from 'vuex'
   import $ from 'jquery'
 
@@ -75,7 +76,11 @@
       },
       remove(todo) {
         // return this.$store.dispatch('removeTodo', todo);
-        return this.removeTodo(todo);
+        // return this.removeTodo(todo);
+        var self = this;
+        Api.removeTodo(todo).done(function(data) {
+          self.removeTodo(todo);
+        });
       }
     }
   }

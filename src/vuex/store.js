@@ -19,13 +19,12 @@ const states = {
     {id: 8, name: 'The Giving Tree', author: 'Shel Silverstein', vote: 70},
     {id: 9, name: 'The Fault in Our Stars', author: 'John Green', vote: 0},
     {id: 10, name: 'Wuthering Heights', author: 'Emily Brontë', vote: 90}
-  ]
+  ],
+  token: localStorage.getItem('token')
 }
 
 const mutations = {
-  // GET_BOOK_DATA(state) {
-  //   state.books;
-  // }
+
 }
 
 const actions = {
@@ -37,6 +36,9 @@ const actions = {
 const getters = {
   fetchAllBook(state) {
     return state.books;
+  },
+  checkLogined(state) {
+    return !!state.token
   }
 }
 

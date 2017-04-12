@@ -24,13 +24,19 @@ const states = {
 }
 
 const mutations = {
-
+  VOTE_BOOK(state, book) {
+    state.books.filter(function(i) {
+      if (i.id === book.id) {
+        return i.vote += 1;
+      }
+    })
+  }
 }
 
 const actions = {
-  // fetchAllBook(state) {
-  //   state.commit('GET_BOOK_DATA');
-  // }
+  voteBook(state, book) {
+    state.commit('VOTE_BOOK', book);
+  }
 }
 
 const getters = {
@@ -39,7 +45,7 @@ const getters = {
   },
   checkLogined(state) {
     return !!state.token
-  }
+  },
 }
 
 

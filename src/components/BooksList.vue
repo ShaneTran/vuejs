@@ -31,7 +31,7 @@
             <a href="javascript:void(0)" class="btn btn-info" v-if="!edit" @click.prevent="editBook(book)">Edit</a>
             <a href="javascript:void(0)" class="btn btn-success" v-if="edit" @click.prevent="updateBook(book)">Update</a>
             <a href="javascript:void(0)" class="btn btn-danger" v-if="edit" @click.prevent="cancleBook(book)">Cancel</a>
-            <a href="javascript:void(0)" class="btn btn-primary" v-if="!edit" @click.prevent="voteBook(book)">Vote</a>
+            <a href="javascript:void(0)" class="btn btn-primary" v-if="!edit" @click.prevent="voteBooks(book)">Vote</a>
             <a href="javascript:void(0)" class="btn btn-danger" v-if="!edit" @click.prevent="deleteBook(book)">Delete</a>
           </td>
         </tr>
@@ -54,6 +54,7 @@
   </div>
 </template>
 <script>
+  import {mapActions} from "vuex"
   export default {
     data() {
       return {
@@ -68,6 +69,7 @@
     computed: {
     },
     methods: {
+      ...mapActions(['voteBook']),
       updateBook(book) {
         var _this = this;
         return this.$store.state.books.filter(function(i) {
@@ -84,12 +86,8 @@
       cancleBook() {
         this.edit = false;
       },
-      voteBook(book) {
-        return this.$store.state.books.filter(function(i) {
-          if (i.id == book.id) {
-            return i.vote += 1;
-          }
-        })
+      voteBooks(book) {
+        this.voteBook(book);
       },
       deleteBook(book) {
         return this.$store.state.books.splice(this.$store.state.books.indexOf(book), 1);

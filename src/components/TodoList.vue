@@ -58,7 +58,6 @@
     },
     created() {
       this.fetchTodo;
-      // this.getVote(10);
     },
     methods: {
       ...mapActions(['addTodo', 'completedTodo', 'unCompletedTodo', 'removeTodo']),

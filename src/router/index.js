@@ -22,7 +22,6 @@ export default new Router({
       component: Login,
       meta: { requiresAuth: false },
       beforeEnter: function(to, from, next) {
-        console.log(this.$store);
         // if (!store.getters.checkLogined) {
         //   // next('/login');
         // } else {

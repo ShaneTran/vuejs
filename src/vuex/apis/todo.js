@@ -1,10 +1,11 @@
 import $ from 'jquery'
-
+import axios from 'axios';
 
 
 export default {
   fecthTodo: function() {
-    return $.get('http://jsonplaceholder.typicode.com/todos');
+    // return $.get('http://jsonplaceholder.typicode.com/todos');
+    return axios.get('http://jsonplaceholder.typicode.com/todos')
   },
 
   addTodo: function(todo) {

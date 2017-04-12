@@ -46,8 +46,8 @@ export default {
   },
   actions: {
     fetchTodo(state) {
-      Api.fecthTodo().then(function(data) {
-        state.commit('SET_TODO_LIST', data);
+      Api.fecthTodo().then(function(response) {
+        state.commit('SET_TODO_LIST', response.data);
       });
     },
     addTodo(state, todo) {

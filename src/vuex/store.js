@@ -30,12 +30,24 @@ const mutations = {
         return i.vote += 1;
       }
     })
+  },
+  DELETE_BOOK(state, book) {
+    state.books.splice(state.books.indexOf(book), 1);
+  },
+  SAVE_BOOK(state, book) {
+    state.books.push({id: 11, name: book.name, author: book.author, vote: 0});
   }
 }
 
 const actions = {
   voteBook(state, book) {
     state.commit('VOTE_BOOK', book);
+  },
+  deleteBook(state, book) {
+    state.commit("DELETE_BOOK", book);
+  },
+  saveBook(state, book) {
+    state.commit("SAVE_BOOK", book);
   }
 }
 

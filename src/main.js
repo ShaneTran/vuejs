@@ -13,16 +13,29 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 router.beforeEach(function(to, from, next) {
   localStorage.setItem('token', '1234556')
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.getters.checkLogined) {
-      next('/login');
+  let login = store.getters.checkLogined;
+  if (to.meta.requiresAuth) {
+    if (login) {
+      if (to.name == 'login') {
+        return next({path: '/login'});
+      }
+      next();
     } else {
+      if (to.name != 'login') {
+        return next({path: '/login'});
+      }
       next();
     }
   } else {
+    if (login) {
+      if (to.name == 'login') {
+        return next({path: '/'});
+      }
+    }
     next();
   }
 });
+
 
 
 new Vue({
@@ -32,3 +45,4 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+

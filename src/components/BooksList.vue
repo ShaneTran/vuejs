@@ -31,8 +31,8 @@
             <a href="javascript:void(0)" class="btn btn-info" v-if="!edit" @click.prevent="editBook(book)">Edit</a>
             <a href="javascript:void(0)" class="btn btn-success" v-if="edit" @click.prevent="updateBook(book)">Update</a>
             <a href="javascript:void(0)" class="btn btn-danger" v-if="edit" @click.prevent="cancleBook(book)">Cancel</a>
-            <a href="javascript:void(0)" class="btn btn-primary" v-if="!edit" @click.prevent="voteBooks(book)">Vote</a>
-            <a href="javascript:void(0)" class="btn btn-danger" v-if="!edit" @click.prevent="deleteBook(book)">Delete</a>
+            <a href="javascript:void(0)" class="btn btn-primary" v-if="!edit" @click.prevent="vote(book)">Vote</a>
+            <a href="javascript:void(0)" class="btn btn-danger" v-if="!edit" @click.prevent="remove(book)">Delete</a>
           </td>
         </tr>
         <tr>
@@ -45,8 +45,7 @@
           <td>0</td>
           <td>0</td>
           <td>
-            <a href="javascript:void(0)" class="btn btn-success" @click.prevent="saveBook(book)">Update</a>
-            <a href="javascript:void(0)" class="btn btn-danger" @click.prevent="closeBook(book)">Cancel</a>
+            <a href="javascript:void(0)" class="btn btn-success" @click.prevent="save">Save</a>
           </td>
         </tr>
       </tbody>
@@ -69,7 +68,7 @@
     computed: {
     },
     methods: {
-      ...mapActions(['voteBook']),
+      ...mapActions(['voteBook', 'deleteBook', 'saveBook']),
       updateBook(book) {
         var _this = this;
         return this.$store.state.books.filter(function(i) {
@@ -80,17 +79,20 @@
           _this.edit = false;
         });
       },
+      save() {
+        this.saveBook(this.book);
+      },
       editBook(book) {
         this.edit = true;
       },
       cancleBook() {
         this.edit = false;
       },
-      voteBooks(book) {
+      vote(book) {
         this.voteBook(book);
       },
-      deleteBook(book) {
-        return this.$store.state.books.splice(this.$store.state.books.indexOf(book), 1);
+      remove(book) {
+        this.deleteBook(book);
       }
     }
   }

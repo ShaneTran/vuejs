@@ -20,14 +20,7 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
-      meta: { requiresAuth: false },
-      beforeEnter: function(to, from, next) {
-        // if (!store.getters.checkLogined) {
-        //   // next('/login');
-        // } else {
-        //   // next();
-        // }
-      }
+      meta: { requiresAuth: false }
     },
     {
       path: '/',

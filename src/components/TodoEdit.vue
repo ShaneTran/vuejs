@@ -1,14 +1,15 @@
 <template>
   <div class="toto-edit">
     <h1>Todo info {{this.$route.params.id}} {{todo}}</h1>
-    Title: <input type="text" :value="todo.title" @input="updateTitle"><br/>
+    Title: <input type="text" :value="todo.title" @input="setField('title', $event)"><br/>
+    Title: <input type="text" :value="todo.userId" @input="setField('userId', $event)"><br/>
     <button class="btn btn-primary" @click.prevent="save">Save</button>
   </div>
 </template>
 
 <script>
   import Api from '@/vuex/apis/todo'
-  import { mapGetters, mapActions, mapState } from 'vuex'
+  import { mapGetters, mapActions, mapState, mapMutations } from 'vuex'
   export default {
     data() {
       return {
@@ -30,8 +31,9 @@
     },
     methods: {
       ...mapActions(['editTodo']),
-      updateTitle(event) {
-        this.$store.commit('updateTitle', event.target.value)
+      ...mapMutations(['SET_FIELD']),
+      setField(attribute, event) {
+        this.SET_FIELD([attribute, event.target.value])
       },
       save() {
         var _this = this;

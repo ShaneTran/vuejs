@@ -38,8 +38,10 @@ export default {
       var todos = state.todos;
       todos.splice(todos.indexOf(todo), 1);
     },
-    updateTitle(state, title) {
-      state.todo.title = title;
+    SET_FIELD(state, obj) {
+      var key = obj[0];
+      var val = obj[1];
+      state.todo[key] = val;
     }
   },
   actions: {
@@ -77,9 +79,6 @@ export default {
       Api.getTodoItem(id).then(function(data) {
         state.commit('EDIT_TODO', data);
       });
-    },
-    updateMessage (state, todo) {
-      state.todo = todo
     }
   },
   getters: {
